@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY app.py /app
 
+RUN pip install --upgrade pip setuptools
 RUN pip install flask
 
 CMD ["python", "app.py"]
