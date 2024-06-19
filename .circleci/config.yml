@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: default
+          version: 20.10.7
       - run:
           name: Install AWS CLI
           command: |
@@ -45,6 +45,11 @@ jobs:
           name: Push Docker Image to ECR
           command: |
             docker push 276183208465.dkr.ecr.us-east-2.amazonaws.com/ahj-final-ecs-ecr:latest
+
+      - run:
+          name: Update ECS Service
+          command: |
+            aws ecs update-service --cluster ahj-final-ecs-cluster --service ahj-final-ecs-service --force-new-deployment
 
 workflows:
   version: 2
